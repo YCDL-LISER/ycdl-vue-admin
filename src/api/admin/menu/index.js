@@ -3,45 +3,46 @@ import request from '@/utils/request'
 /**
  * 从服务器获取路由信息
  */
-export function loadRoutes() {
+export function loadRoutes(role) {
   return request({
-    url: '/ycdl-admin/menu/sidebar',
+    url: '/admin/menus/sidebar/' + role,
     method: 'get'
   })
 }
 
-export function tree() {
+export function fetchMenuTree(query) {
   return request({
-    url: '/ycdl-admin/menu/tree',
-    method: 'get'
+    url: '/admin/menus/tree',
+    method: 'get',
+    params: query
   })
 }
 
-export function postOne(obj) {
+export function addObj(obj) {
   return request({
-    url: '/ycdl-admin/menu',
+    url: '/admin/menus',
     method: 'post',
     data: obj
   })
 }
 
-export function getOne(id) {
+export function getObj(id) {
   return request({
-    url: '/ycdl-admin/menu/' + id,
+    url: '/admin/menus/' + id,
     method: 'get'
   })
 }
 
-export function deleteOne(id) {
+export function delObj(id) {
   return request({
-    url: '/ycdl-admin/menu/' + id,
+    url: '/admin/menus/' + id,
     method: 'delete'
   })
 }
 
-export function putOne(id, obj) {
+export function putObj(obj) {
   return request({
-    url: '/ycdl-admin/menu/' + id,
+    url: '/admin/menus',
     method: 'put',
     data: obj
   })

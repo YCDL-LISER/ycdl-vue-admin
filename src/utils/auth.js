@@ -5,7 +5,7 @@ const TokenKey = 'Admin-Token'
 const Base64 = Base64JS.Base64
 
 export const oauth2 = {
-  client_id: 'webApp',
+  client_id: 'vueApp',
   client_secret: 'webApp'
 }
 

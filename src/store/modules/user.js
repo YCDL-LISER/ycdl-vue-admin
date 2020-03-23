@@ -7,7 +7,8 @@ const state = {
   name: '',
   avatar: '',
   introduction: '',
-  roles: []
+  roles: [],
+  currentLoginRole: ''
 }
 
 const mutations = {
@@ -23,6 +24,9 @@ const mutations = {
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
   },
+  SET_ROLE: (state, role) => {
+    state.role = role
+  },
   SET_ROLES: (state, roles) => {
     state.roles = roles
   }
@@ -37,16 +41,16 @@ const actions = {
         username: username.trim(),
         password: password,
         captcha: captcha,
-        grant_type: 'password' })
-        .then(response => {
-          const { data } = response
-          console.log(data.access_token)
-          commit('SET_TOKEN', data.access_token)
-          setToken(data.access_token)
-          resolve()
-        }).catch(error => {
-          reject(error)
-        })
+        grant_type: 'password'
+      }).then(response => {
+        const { data } = response
+        console.log('认证结果：' + JSON.stringify(data))
+        commit('SET_TOKEN', data.data.access_token)
+        setToken(data.data.access_token)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
     })
   },
 
@@ -55,23 +59,25 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { data } = response
-
-        if (!data) {
+        const result = data.data
+        console.log('用户信息：' + JSON.stringify(result))
+        if (!result) {
           reject('Verification failed, please Login again.')
         }
 
-        const { roles, username, nickname } = data
+        const { userId, nickname, role, roles } = result
 
         // roles must be a non-empty array
         if (!roles || roles.length <= 0) {
           reject('getInfo: roles must be a non-null array!')
         }
 
-        commit('SET_ROLES', roles)
-        commit('SET_NAME', username)
+        commit('SET_NAME', userId)
         commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
         commit('SET_INTRODUCTION', nickname)
-        resolve(data)
+        commit('SET_ROLE', role)
+        commit('SET_ROLES', roles)
+        resolve(result)
       }).catch(error => {
         reject(error)
       })

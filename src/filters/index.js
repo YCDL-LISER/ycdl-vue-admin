@@ -49,7 +49,7 @@ export function toThousandFilter(num) {
  * @returns {*}
  */
 export function dateFilter(date) {
-  if (date == null || date === undefined) {
+  if (date == null) {
     return date
   }
   return moment(date).format('YYYY-MM-DD HH:mm:ss')

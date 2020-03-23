@@ -1,36 +1,37 @@
 import request from '@/utils/request'
 import { authorization } from '@/utils/auth'
-import Qs from 'qs'
+// import Qs from 'qs'
 
 export function getIdentifyingCode(type) {
   return request({
-    url: '/ycdl-auth/captcha/' + type,
+    url: '/auth/captcha/' + type,
     method: 'get'
   })
 }
 
 export function login(data) {
   return request({
-    url: '/ycdl-auth/oauth/token',
+    url: '/auth/oauth/token',
     method: 'post',
     headers: {
-      'Authorization': authorization,
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Authorization': authorization
+      // 'Content-Type': 'application/x-www-form-urlencoded'
     },
-    data: Qs.stringify(data)
+    // data: Qs.stringify(data)
+    data: data
   })
 }
 
 export function getInfo() {
   return request({
-    url: '/ycdl-admin/user/information',
+    url: '/admin/users/information',
     method: 'get'
   })
 }
 
 export function logout() {
   return request({
-    url: '/ycdl-auth/oauth/logout',
+    url: '/auth/oauth/token',
     method: 'delete'
   })
 }

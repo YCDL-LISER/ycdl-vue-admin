@@ -75,18 +75,19 @@ export function resetRouter() {
 export function formattedRouter(data) {
   const routers = []
   data.forEach(menu => {
-    const { menuId, name, path, router, icon, hidden, children } = menu
+    const { id, label, path, component, icon, children } = menu
     const menuRouter = {
       path: path,
-      component: () => import(`@/views/${router}`),
-      name: menuId.toString(),
-      hidden: hidden,
+      component: () => import(`@/views/${component}`),
+      name: id.toString(),
+      hidden: false,
       meta: {
-        title: name,
+        title: label,
         icon: icon
       },
       children: children === null ? [] : formattedRouter(children)
     }
+    console.log('路由：' + JSON.stringify(menuRouter))
     routers.push(menuRouter)
   })
   return routers

@@ -14,10 +14,12 @@ const mutations = {
 }
 
 const actions = {
-  loadRoutes({ commit }, roles) {
+  loadRoutes({ commit }, role) {
+    console.log('参数：' + JSON.stringify(role))
     return new Promise((resolve, reject) => {
-      loadRoutes().then(response => {
+      loadRoutes(role).then(response => {
         const { data } = response
+        console.log('加载异步菜单：' + JSON.stringify(data.data))
         const finalRouters = formattedRouter(data.data)
         const notFound = { path: '*', redirect: '/404', hidden: true }
         finalRouters.push(notFound)

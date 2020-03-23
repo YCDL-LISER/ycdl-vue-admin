@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container calendar-list-container">
+  <div class="app-container">
     <el-tabs v-model="activeName" :tab-position="tabPosition">
       <el-tab-pane label="用户信息" name="user">
         <div class="filter-container">
@@ -26,7 +26,6 @@
             :closable="false"
           />
         </div>
-
         <el-table
           :key="tableKey"
           v-loading.body="listLoading"

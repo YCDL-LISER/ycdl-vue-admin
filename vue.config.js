@@ -41,7 +41,7 @@ module.exports = {
       //   }
       // }
       '/dev-api': {
-        target: 'http://localhost:10010/', // 这里写的是访问接口的域名和端口号
+        target: 'http://192.168.0.101:10010/', // 这里写的是访问接口的域名和端口号
         changeOrigin: true, // 必须加上这个才能跨域请求
         pathRewrite: { // 重命名
           '^/dev-api': '/'

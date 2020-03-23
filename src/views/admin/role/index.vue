@@ -42,7 +42,7 @@
           <span>{{ scope.row.roleName }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="备注">
+      <el-table-column align="center" label="描述信息">
         <template slot-scope="scope">
           <span>{{ scope.row.remark }}</span>
         </template>

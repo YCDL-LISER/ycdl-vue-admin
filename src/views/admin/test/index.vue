@@ -1,39 +1,52 @@
 <template>
-  <div class="tab-container">
-    <el-tabs v-model="activeName" :before-leave="disableSwitch" style="margin-top:15px;">
-      <el-tab-pane label="用户管理" name="one">
-        <user @fatherMethod="fatherMethod" />
-      </el-tab-pane>
-      <el-tab-pane label="角色分配" name="two">
-        <role
-          :id-list="idList"
-        />
-      </el-tab-pane>
-    </el-tabs>
+  <div>
+    <h1>哈哈</h1>
   </div>
 </template>
-
 <script>
-import User from './components/user'
-import Role from './components/role'
 export default {
-  name: 'Resource',
-  components: { User, Role },
   data() {
     return {
-      activeName: 'one',
-      disableValue: false,
-      idList: 1
+      page: {
+        pageSize: 20
+      },
+      data: [],
+      option: {
+        align: 'center',
+        menuAlign: 'center',
+        column: [
+          {
+            label: '姓名',
+            prop: 'name'
+          },
+          {
+            label: '性别',
+            prop: 'sex'
+          }
+        ]
+      }
     }
   },
   methods: {
-    disableSwitch() {
-      return this.disableValue
-    },
-    fatherMethod(data) {
-      this.disableValue = true
-      this.activeName = 'two'
-      // this.idList = JSON.stringify(data) // 选中数据
+    onLoad(page) {
+      this.$message.success('分页信息:' + JSON.stringify(page))
+      this.page.total = 40
+      // 模拟分页
+      if (page.currentPage === 1) {
+        this.data = [
+          {
+            name: '张三',
+            sex: '男'
+          }
+        ]
+      } else if (page.currentPage === 2) {
+        this.data = [
+          {
+            name: '李四',
+            sex: '女'
+          }
+        ]
+      }
     }
   }
 }
